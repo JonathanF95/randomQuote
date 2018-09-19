@@ -30,19 +30,23 @@ const quotes = [
 let quote = document.querySelector(".quote");
 let source = document.querySelector(".source");
 let button = document.querySelector("#loadQuote");
+let box = document.querySelector('#quote-box');
 
 //Function that picks a random index from the array of quotes
-function getRandomQuote(array) {
-  let randomNumber = Math.floor(Math.random() * array.length);
-  quote.innerHTML = array[randomNumber].quote;
-  source.innerHTML = array[randomNumber].source;
+function getRandomQuote() {
+  let randomNumber = Math.floor(Math.random() * quotes.length);
+  return quotes[randomNumber];
 }
 
 //Function with button, once clicked it displays and manipulates the DOM
 function printQuote() {
-  button.addEventListener("click", function() {
-    getRandomQuote(quotes);
-  });
+    let randomQuote = getRandomQuote();
+    let html = `<p class="quote">${randomQuote.quote}</p>
+    <p class="source">${randomQuote.source}</p>`;
+
+    box.innerHTML = html;
 }
 
 printQuote();
+
+button.addEventListener('click', printQuote);
